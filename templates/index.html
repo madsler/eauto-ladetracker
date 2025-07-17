@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ladezyklen</title>
+    <link rel="stylesheet" href="/static/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Ladevorgang erfassen</h1>
+    <form method="POST">
+	<input type="date" name="datum" value="{{ today }}" required><br>
+        <input type="number" name="kilometerstand" placeholder="Kilometerstand" required><br>
+        <input type="number" step="0.01" name="lademenge_kw" placeholder="Lademenge (kWh)" required><br>
+        <p><i>Ladekosten werden automatisch mit 27,56 ct/kWh berechnet.</i></p>
+        <button type="submit">Speichern</button>
+    </form>
+
+    <h2>Alle Ladevorgänge</h2>
+    <table>
+        <tr>
+            <th>Datum</th>
+            <th>Kilometerstand</th>
+            <th>Ladekosten (€)</th>
+            <th>Lademenge (kWh)</th>
+        </tr>
+        {% for eintrag in ladezyklen %}
+        <tr>
+            <td>{{ eintrag[1] }}</td>
+            <td>{{ eintrag[2] }}</td>
+            <td>{{ eintrag[3] }}</td>
+            <td>{{ eintrag[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="/export">→ Exportieren</a></p>
+</body>
+</html>
